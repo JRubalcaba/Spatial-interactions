@@ -8,6 +8,6 @@ allowed, except when an overlap occurs. The procedure generates a spatial patter
 That is, the null model generates repulsion and attraction areas with the only assumption that sessile individuals cannot overlap 
 in the space, and therefore, in abscence of ecological interactions. This suggest that  the use of too simplistic null models can lead
 to interpret some random spatial patterns as a product of complex ecological processes. This is a well known procedure in Statistic 
-Mechanics that can be solved analythicaly. Here, I propose a simple code in R to ilustrate the rationale numerically, with application 
+Mechanics that can be solved analytically. Here, I propose a simple code in R to ilustrate it numerically , with application 
 to spatial ecology. 
 

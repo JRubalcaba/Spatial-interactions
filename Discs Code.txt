@@ -1,0 +1,69 @@
+
+### 1D
+
+piezas = 5
+r = 0.08
+N = 500000
+
+configs <- matrix(ncol = piezas, nrow = N)
+
+for(i in 1:N){
+  positions <- runif(piezas, 0, 1)
+  dists <- matrix(ncol = piezas, nrow = piezas)
+    
+  for(j in 1:piezas) {
+    dists[,j] <- abs(positions[j] - positions)
+  }
+    
+  dists <- dists[dists > 0]
+    
+  if(length(dists[dists < 2*r]) == 0) {
+    configs[i,] <- positions 
+  }
+}
+
+configs <- na.omit(configs)
+length(configs)
+
+plot(density(configs))
+
+
+### 2D 
+
+r = 0.06
+N = 500000
+
+configs.x <- matrix(ncol = 5, nrow = N)
+configs.y <- matrix(ncol = 5, nrow = N)
+
+for(i in 1:N) {
+  y <- runif(5, 0, 1)
+  x <- runif(5, 0, 1)
+
+  diffs.x <- matrix(ncol = 5, nrow = 5)
+  diffs.y <- matrix(ncol = 5, nrow = 5)
+    
+  for(j in 1:5) {
+    diffs.x[,j] <- abs(x[j] - x)
+    diffs.y[,j] <- abs(y[j] - y)
+  }
+    
+  diffs.x <- diffs.x[diffs.x > 0]
+  diffs.y <- diffs.y[diffs.y > 0]
+    
+  if(length(diffs.x[diffs.x < 2*r]) == 0 & length(diffs.y[diffs.y < 2*r]) == 0) {
+    configs.y[i,] <- y
+    configs.x[i,] <- x
+  }
+}
+
+configs.x <- na.omit(configs.x)
+configs.y <- na.omit(configs.y)
+
+d.x <- density(configs.x, n = 100)
+d.y <- density(configs.y, n = 100)
+z <- outer(d.x$y,d.y$y)
+
+persp(x = d.x$x, y = d.y$x, z = z, theta = 90, phi = 40)
+
+
